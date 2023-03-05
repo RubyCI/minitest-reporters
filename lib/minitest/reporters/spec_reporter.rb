@@ -47,10 +47,10 @@ module Minitest
       end
 
       def record(test)
-        test_finished(test)
+        #test_finished(test)
         super
-        # record_print_status(test)
-        # record_print_failures_if_any(test)
+        record_print_status(test)
+        record_print_failures_if_any(test)
       end
 
       protected
