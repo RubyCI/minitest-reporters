@@ -105,17 +105,17 @@ module Minitest
         #             end
         #            end
 
-        # fully_formatted = if test.failure
-        #                     fully_formatted = "\\n" + test.failure.message.split("\n").first
+        fully_formatted = if test.failure
+                            fully_formatted = "\\n" + test.failure.message.split("\n").first
 
-        #                     test.failure.backtrace.each do |l|
-        #                       if !l['/cache/']
-        #                         fully_formatted << "\\n    " + cyan + l + "\\033[0m"
-        #                       end
-        #                     end
+                            test.failure.backtrace.each do |l|
+                              if !l['/cache/']
+                                fully_formatted << "\\n    " + cyan + l + "\\033[0m"
+                              end
+                            end
 
-        #                     fully_formatted
-        #                   end
+                            fully_formatted
+                          end
 
         output_inside = output&.split("\\n")&.select do |line|
           !line['Screenshot']
@@ -129,7 +129,7 @@ module Minitest
           location: "location",
           status: status(test),
           run_time: test.time,
-          fully_formatted: "fully_formatted",
+          fully_formatted: fully_formatted,
           output_inside: output_inside,
           screenshots_base64: [screenshots_base64(output)]
         )
