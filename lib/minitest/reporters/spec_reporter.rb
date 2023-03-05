@@ -47,10 +47,10 @@ module Minitest
       end
 
       def record(test)
-        #test_finished(test)
+        test_finished(test)
         super
-        record_print_status(test)
-        record_print_failures_if_any(test)
+        #record_print_status(test)
+        #record_print_failures_if_any(test)
       end
 
       protected
@@ -105,31 +105,31 @@ module Minitest
         #             end
         #            end
 
-        fully_formatted = if test.failure
-                            fully_formatted = "\\n" + test.failure.message.split("\n").first
+        # fully_formatted = if test.failure
+        #                     fully_formatted = "\\n" + test.failure.message.split("\n").first
 
-                            test.failure.backtrace.each do |l|
-                              if !l['/cache/']
-                                fully_formatted << "\\n    " + cyan + l + "\\033[0m"
-                              end
-                            end
+        #                     test.failure.backtrace.each do |l|
+        #                       if !l['/cache/']
+        #                         fully_formatted << "\\n    " + cyan + l + "\\033[0m"
+        #                       end
+        #                     end
 
-                            fully_formatted
-                          end
+        #                     fully_formatted
+        #                   end
 
-                          output_inside = output&.split("\\n")&.select do |line|
-                            !line['Screenshot']
-                          end&.join('\\n')
+        output_inside = output&.split("\\n")&.select do |line|
+          !line['Screenshot']
+        end&.join('\\n')
 
 
         payload = JSON.fast_generate(
           test_class: test_class(test),
           test_name: test.name.gsub(/^test_\\d*/, '').gsub(/^test_: /, 'test:').gsub(/^_/, '').strip,
           assertions_count: test.assertions,
-          #location: location,
+          location: "location",
           status: status(test),
           run_time: test.time,
-          fully_formatted: fully_formatted,
+          fully_formatted: "fully_formatted",
           output_inside: output_inside,
           screenshots_base64: [screenshots_base64(output)]
         )
