@@ -93,17 +93,17 @@ module Minitest
 
       def test_finished(test)
         output = get_output
-        location = if false
-                    test.method(test.name).source_location.join(":")
-                   else
-                    if (file = "cat /cache/bundle/minitest_cache_file | grep '\#{test.klass} => '".split(' => ').last&.chomp)
-                      file + ":"
-                    else
-                      file = "grep -rw '/app' -e '\#{test.klass} '".split(':').first
-                      "echo '\#{test.klass} => \#{file}' >> /cache/bundle/minitest_cache_file"
-                      file + ":"
-                    end
-                   end
+        # location = if false
+        #             test.method(test.name).source_location.join(":")
+        #            else
+        #             if (file = "cat /cache/bundle/minitest_cache_file | grep '\#{test.klass} => '".split(' => ').last&.chomp)
+        #               file + ":"
+        #             else
+        #               file = "grep -rw '/app' -e '\#{test.klass} '".split(':').first
+        #               "echo '\#{test.klass} => \#{file}' >> /cache/bundle/minitest_cache_file"
+        #               file + ":"
+        #             end
+        #            end
 
         fully_formatted = if test.failure
                             fully_formatted = "\\n" + test.failure.message.split("\n").first
@@ -126,7 +126,7 @@ module Minitest
           test_class: test_class(test),
           test_name: test.name.gsub(/^test_\\d*/, '').gsub(/^test_: /, 'test:').gsub(/^_/, '').strip,
           assertions_count: test.assertions,
-          location: location,
+          #location: location,
           status: status(test),
           run_time: test.time,
           fully_formatted: fully_formatted,
