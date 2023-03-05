@@ -93,8 +93,8 @@ module Minitest
 
       def test_finished(test)
         output = get_output
-        location = if test.location.join(":").start_with?("/app")
-                    test.location.join(":")
+        location = if test.source_location.join(":").start_with?("/app")
+                    test.source_location.join(":")
                    else
                     if (file = `cat /cache/bundle/minitest_cache_file | grep '\#{test.klass} => '`.split(' => ').last&.chomp)
                       file + ":"
