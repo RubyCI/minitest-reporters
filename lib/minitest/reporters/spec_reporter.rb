@@ -96,11 +96,11 @@ module Minitest
         location = if false
                     test.method(test.name).source_location.join(":")
                    else
-                    if (file = `cat /cache/bundle/minitest_cache_file | grep '\#{test.klass} => '`.split(' => ').last&.chomp)
+                    if (file = "cat /cache/bundle/minitest_cache_file | grep '\#{test.klass} => '".split(' => ').last&.chomp)
                       file + ":"
                     else
-                      file = `grep -rw '/app' -e '\#{test.klass} '`.split(':').first
-                      `echo '\#{test.klass} => \#{file}' >> /cache/bundle/minitest_cache_file`
+                      file = "grep -rw '/app' -e '\#{test.klass} '".split(':').first
+                      "echo '\#{test.klass} => \#{file}' >> /cache/bundle/minitest_cache_file"
                       file + ":"
                     end
                    end
